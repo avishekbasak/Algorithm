@@ -57,6 +57,8 @@ class LRU_Cache(object):
         '''
             Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
         '''
+        if self.capacity == 0 or self.capacity is None:
+            return None
         # check if the key already exist in cache. Then update the value. Also remove the node from its current position
         # and add it to the head to signify, it has been recently used,
         # only if the node is not already the head
@@ -172,3 +174,18 @@ our_cache.set(7, 7);
 print(our_cache.get(1))
 # -1
 # because the cache reached it's capacity and 3 was the least recently used entry
+our_cache.set(7, 'seven');
+# after adding lru list::: 2<->6<->5<->4<->7
+# modifying its value
+print(our_cache.get(7))
+#seven
+
+none_cache = LRU_Cache(0)
+print(none_cache.get(1))
+# -1
+# since cache doesn't have anything
+none_cache.set(1,1)
+#does nothing
+print(none_cache.get(1))
+# -1
+# since cache doesn't have anything

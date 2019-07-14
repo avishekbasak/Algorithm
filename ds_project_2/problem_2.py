@@ -111,3 +111,6 @@ print(find_files('.h','/Users/avishekbasak/algo_udacity'))
 #'/Users/avishekbasak/algo_udacity/testdir/subdir5/a.h',
 #'/Users/avishekbasak/algo_udacity/testdir/subdir1/a.h',
 #'/Users/avishekbasak/algo_udacity/testdir/subdir3/subsubdir1/b.h']
+
+print(find_files('.h','/XUsers/avionic/'))
+# None

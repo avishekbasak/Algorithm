@@ -5,6 +5,12 @@ def huffman_encoding(data):
     this method encodes the data and return the encoded data and Tree
     """
 
+    if data is None:
+        return 0,None
+
+    if len(data)==0:
+        return 1,None
+
     # calculate the frequency and construct tuples of freq to
     tuples = calculate_freq(data)
     #Build and sort a list of tuples from lowest to highest frequencies
@@ -30,6 +36,10 @@ def huffman_decoding(data,tree):
     '''
     output = ""
     temp = tree
+    if data == 0 and tree is None:
+        return None
+    if data == 1 and tree is None:
+        return ''
     for ch in data :
         #if the character is 0 go towards left else go towards right of the tree
         if ch == '0' :
@@ -105,6 +115,7 @@ def assignCodes (node, codes, pat='') :
 
 if __name__ == "__main__":
 
+    #test 1
     a_great_sentence = "The bird is the word"
 
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
@@ -125,3 +136,45 @@ if __name__ == "__main__":
     #The size of the decoded data is: 69
     print ("The content of the encoded data is: {}\n".format(decoded_data))
     #The content of the encoded data is: The bird is the word
+
+    #test 2
+
+    a_great_sentence = None
+
+    print ("The content of the data is: {}\n".format(a_great_sentence))
+    #The content of the data is: None
+    encoded_data, tree = huffman_encoding(a_great_sentence)
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    #The content of the encoded data is: 0
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    #The content of the encoded data is: None
+
+    #test 3
+
+    a_great_sentence = ''
+
+    print ("The content of the data is: {}\n".format(a_great_sentence))
+    #The content of the data is:
+    encoded_data, tree = huffman_encoding(a_great_sentence)
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    #The content of the encoded data is: 1
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    #The content of the encoded data is:
+
+    #test 4
+
+    a_great_sentence = 'adihkjhada&&^%!(*098)'
+
+    print ("The content of the data is: {}\n".format(a_great_sentence))
+    #The content of the data is: adihkjhada&&^%!(*098)
+    encoded_data, tree = huffman_encoding(a_great_sentence)
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    #The content of the encoded data is: 10100111000000111101101000010100110110010011111011101101110011011111010100010111001
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    #The content of the encoded data is: adihkjhada&&^%!(*098)
